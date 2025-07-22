@@ -18,5 +18,14 @@ namespace RestapiInventory.Dao
                 return criteria.UniqueResult<PurchaseRequestHeader>();
             }
         }
+        public PurchaseRequestHeader GetByNoDocument(string noDocument)
+        {
+            using (session = sessionFactory.OpenSession())
+            {
+                ICriteria criteria = session.CreateCriteria<PurchaseRequestHeader>();
+                criteria.Add(Expression.Eq("DocumentNumber", noDocument));
+                return criteria.UniqueResult<PurchaseRequestHeader>();
+            }
+        }
     }
 }

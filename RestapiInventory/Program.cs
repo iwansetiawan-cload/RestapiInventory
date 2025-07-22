@@ -39,9 +39,11 @@ var sessionFactory = Fluently.Configure()
 builder.Services.AddScoped(typeof(CommonDao<>));
 builder.Services.AddScoped<PurchaseRequestHeaderDao>();
 builder.Services.AddScoped<PurchaseRequestDetailDao>();
+builder.Services.AddScoped<UserProfileDao>();
 
 // SERVICE
 builder.Services.AddScoped<PurchaseRequestService>();
+builder.Services.AddScoped<UserProfileService>();
 
 builder.Services.AddSingleton(sessionFactory);
 builder.Services.AddScoped(factory => sessionFactory.OpenSession());

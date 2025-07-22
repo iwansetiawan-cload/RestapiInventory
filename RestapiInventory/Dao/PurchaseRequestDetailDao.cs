@@ -12,22 +12,15 @@ namespace RestapiInventory.Dao
         protected ISessionFactory sessionFactory = _sessionFactory;
 
         public IList<PurchaseRequestDetail> GetByHeaderId(string headerId)
-        {   
-            try
+        {
+            using (session = sessionFactory.OpenSession())
             {
-                using (_session = _sessionFactory.OpenSession())
-                {
-                    ICriteria criteria = _session.CreateCriteria<PurchaseRequestDetail>();               
-                    criteria.Add(Restrictions.Eq("PurchaseRequestHeaderId", headerId));
-                    return criteria.List<PurchaseRequestDetail>();
-                }
-            }
-            catch (Exception ex)
-            {
-                string error = ex.Message.ToString();
-                return null;
+                ICriteria criteria = session.CreateCriteria<PurchaseRequestDetail>();
+                criteria.Add(Restrictions.Eq("PurchaseRequestHeaderId", headerId));
+                return criteria.List<PurchaseRequestDetail>();
             }
         }
-        
+       
+
     }
 }
