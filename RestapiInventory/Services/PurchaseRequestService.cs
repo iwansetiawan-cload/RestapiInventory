@@ -47,7 +47,8 @@ namespace RestapiInventory.Services
             {
                 PurchaseRequestViewModel PR = new PurchaseRequestViewModel();
                 PR.purchaseRequestHeader = _purchaseRequestHeaderDao.GetByNoDocument(noreq);
-                PR.purchaseRequestDetails = _purchaseRequestDetailDao.GetByHeaderId(PR.purchaseRequestHeader.Id.ToUpper());
+                if (PR.purchaseRequestHeader != null)
+                    PR.purchaseRequestDetails = _purchaseRequestDetailDao.GetByHeaderId(PR.purchaseRequestHeader.Id.ToUpper());
 
                 return new FormDto<PurchaseRequestViewModel>(PR);
             }
